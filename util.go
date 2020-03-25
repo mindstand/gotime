@@ -2,6 +2,8 @@ package gotime
 
 import "time"
 
+var epoch = time.Unix(0, 0).UTC()
+
 type baseTime struct {
 	t time.Time
 }

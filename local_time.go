@@ -6,10 +6,51 @@ type LocalTime struct {
 	baseTime
 }
 
-func NewLocalTime(t time.Time) *LocalTime {
+func (lt LocalTime) Year() int {
+	return lt.t.Year()
+}
+
+func (lt LocalTime) Month() time.Month {
+	return lt.t.Month()
+}
+
+func (lt LocalTime) Day() int {
+	return lt.t.Day()
+}
+
+func (lt LocalTime) Hour() int {
+	return lt.t.Hour()
+}
+
+func (lt LocalTime) Minute() int {
+	return lt.t.Minute()
+}
+
+func (lt LocalTime) Second() int {
+	return lt.t.Second()
+}
+
+func (lt LocalTime) Nanosecond() int {
+	return lt.t.Nanosecond()
+}
+
+// Sub is equivalent to .GetTime().Sub()
+func (lt LocalTime) Sub(otherT LocalTime) time.Duration {
+	return lt.t.Sub(otherT.t)
+}
+
+func NewLocalTimeFromTime(t time.Time) *LocalTime {
 	return &LocalTime{
 		baseTime{
 			t: t.Local(),
+		},
+	}
+}
+
+func NewLocalClock(hour, minute, second, nanosecond int) LocalClock {
+	return LocalClock{
+		baseTime{
+			t: time.Date(1, 1, 1, hour, minute, second, nanosecond, time.UTC),
 		},
 	}
 }
