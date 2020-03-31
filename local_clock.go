@@ -31,11 +31,11 @@ func (c LocalClock) ToDayNano() int64 {
 	return c.t.Sub(epochLocal).Nanoseconds()
 }
 
-func NewLocalClockFromTime(t time.Time) *LocalClock {
+func NewLocalClockFromTime(t time.Time) LocalClock {
 	t = t.Local()
 	hour, minute, second := t.Clock()
 	nano := t.Nanosecond()
-	return &LocalClock{
+	return LocalClock{
 		baseTime{
 			t: time.Date(1970, 1, 1, hour, minute, second, nano, time.Local),
 		},

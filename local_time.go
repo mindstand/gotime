@@ -39,8 +39,8 @@ func (lt LocalTime) Sub(otherT LocalTime) time.Duration {
 	return lt.t.Sub(otherT.t)
 }
 
-func NewLocalTimeFromTime(t time.Time) *LocalTime {
-	return &LocalTime{
+func NewLocalTimeFromTime(t time.Time) LocalTime {
+	return LocalTime{
 		baseTime{
 			t: t.Local(),
 		},
