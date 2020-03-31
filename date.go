@@ -29,6 +29,11 @@ func (d Date) Sub(otherD Date) time.Duration {
 	return d.t.Sub(otherD.t)
 }
 
+// ToEpochDays returns the date's number of days since unix epoch time
+func (d Date) ToEpochDays() int {
+	return int(d.t.Sub(epoch).Hours() / 24)
+}
+
 func NewDateFromTime(t time.Time) Date {
 	year, month, day := t.Date()
 	return Date{
