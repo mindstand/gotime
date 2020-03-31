@@ -46,11 +46,3 @@ func NewLocalTimeFromTime(t time.Time) *LocalTime {
 		},
 	}
 }
-
-func NewLocalClock(hour, minute, second, nanosecond int) LocalClock {
-	return LocalClock{
-		baseTime{
-			t: time.Date(1, 1, 1, hour, minute, second, nanosecond, time.UTC),
-		},
-	}
-}

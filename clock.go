@@ -50,3 +50,12 @@ func NewClock(hour, minute, second, nanosecond int, location *time.Location) Clo
 		},
 	}
 }
+
+func NewClockOfDayNano(nanoOfDay int64) Clock {
+	// todo check for time greater than one day
+	return Clock{
+		baseTime{
+			t: epoch.Add(time.Duration(nanoOfDay)),
+		},
+	}
+}
