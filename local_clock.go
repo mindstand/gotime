@@ -37,7 +37,7 @@ func NewLocalClockFromTime(t time.Time) *LocalClock {
 	nano := t.Nanosecond()
 	return &LocalClock{
 		baseTime{
-			t: time.Date(1, 1, 1, hour, minute, second, nano, time.Local),
+			t: time.Date(1970, 1, 1, hour, minute, second, nano, time.Local),
 		},
 	}
 }
@@ -45,7 +45,7 @@ func NewLocalClockFromTime(t time.Time) *LocalClock {
 func NewLocalClock(hour, minute, second, nanosecond int) LocalClock {
 	return LocalClock{
 		baseTime{
-			t: time.Date(1, 1, 1, hour, minute, second, nanosecond, time.UTC),
+			t: time.Date(1970, 1, 1, hour, minute, second, nanosecond, time.Local),
 		},
 	}
 }

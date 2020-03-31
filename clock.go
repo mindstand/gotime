@@ -31,6 +31,12 @@ func (c Clock) Sub(otherC Clock) time.Duration {
 	return c.t.Sub(otherC.t)
 }
 
+func (c Clock) ToDayNano() int64 {
+	epochInTz := time.Date(1970, 1, 1, 0, 0, 0, 0, c.t.Location())
+
+	return c.t.Sub(epochInTz).Nanoseconds()
+}
+
 func NewClockFromTime(t time.Time) Clock {
 	t = t.Local()
 	hour, minute, second := t.Clock()
@@ -46,16 +52,18 @@ func NewClockFromTime(t time.Time) Clock {
 func NewClock(hour, minute, second, nanosecond int, location *time.Location) Clock {
 	return Clock{
 		baseTime{
-			t: time.Date(1, 1, 1, hour, minute, second, nanosecond, location),
+			t: time.Date(1970, 1, 1, hour, minute, second, nanosecond, location),
 		},
 	}
 }
 
-func NewClockOfDayNano(nanoOfDay int64) Clock {
+func NewClockOfDayNano(nanoOfDay int64, location *time.Location) Clock {
 	// todo check for time greater than one day
+	epochInTz := time.Date(1970, 1, 1, 0, 0, 0, 0, location)
+
 	return Clock{
 		baseTime{
-			t: epoch.Add(time.Duration(nanoOfDay)),
+			t: epochInTz.Add(time.Duration(nanoOfDay)),
 		},
 	}
 }
