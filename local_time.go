@@ -46,3 +46,16 @@ func NewLocalTimeFromTime(t time.Time) *LocalTime {
 		},
 	}
 }
+
+func NewLocalTimeFromUnix(epochSeconds, nanoOfDay int64) LocalTime {
+	t := time.Unix(epochSeconds, nanoOfDay)
+	// get local offset
+	_, offset := t.Zone()
+	t = t.Add(time.Duration(-offset) * time.Second)
+
+	return LocalTime{
+		baseTime{
+			t: t,
+		},
+	}
+}
