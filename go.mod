@@ -1,4 +1,4 @@
 module github.com/mindstand/gotime
 
-go 1.13.3
+go 1.14
 
